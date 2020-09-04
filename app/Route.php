@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Middlewares\Middleware;
+
 /**
  * Class Route
  * @package App
@@ -16,6 +18,8 @@ final class Route
     private string $route;
     private string $handler;
     private string $pattern;
+
+    private Middleware $middleware;
 
     /**
      * Route constructor.
@@ -62,6 +66,19 @@ final class Route
     public function getPattern(): string
     {
         return '/' . $this->pattern . '/';
+    }
+
+    /**
+     * @return Middleware
+     */
+    public function getMiddleware(): Middleware
+    {
+        return $this->middleware;
+    }
+
+    public function middleware(string $class)
+    {
+        $this->middleware = new $class();
     }
 
     /**

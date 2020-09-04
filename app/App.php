@@ -42,6 +42,8 @@ final class App extends Singleton
 
             $parameters = $this->router()->parseParameters($route);
 
+            $route->getMiddleware()->run();
+
             echo $handler($parameters);
         } catch (Throwable $e) {
             die($e->getMessage());
