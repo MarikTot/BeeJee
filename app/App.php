@@ -20,7 +20,7 @@ final class App extends Singleton
     {
         parent::__construct();
 
-        $this->router = new Router();
+        $this->router = Router::getInstance();
     }
 
     /**
@@ -40,7 +40,9 @@ final class App extends Singleton
             $route = $this->router()->findRoute();
             $handler = $this->handler($route->getHandler());
 
-            echo $handler();
+            $parameters = $this->router()->parseParameters($route);
+
+            echo $handler($parameters);
         } catch (Throwable $e) {
             die($e->getMessage());
         }

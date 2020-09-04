@@ -2,11 +2,13 @@
 
 namespace App;
 
+use App\Exceptions\PreparerException;
+
 /**
  * Class Router
  * @package App
  */
-final class Router
+final class Router extends Singleton
 {
     /** @var Route[] */
     private array $routes;
@@ -46,7 +48,12 @@ final class Router
      */
     public static function getCurrentURI(): string
     {
-        return $_SERVER['REQUEST_URI'];
+        $current = $_SERVER['REQUEST_URI'];
+        $base = Config::getInstance()->getBaseUrl();
+
+        $pattern = sprintf('/^%s/', $base);
+
+        return preg_replace($pattern, '/', $current) ?? '/';
     }
 
     /**
@@ -55,6 +62,17 @@ final class Router
     public static function getCurrentMethod(): string
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
+    }
+
+    /**
+     * @param Route $route
+     * @return array
+     * @throws PreparerException
+     */
+    public function parseParameters(Route $route): array
+    {
+        $parser = new RouteParser(self::getCurrentURI(), $route);
+        return $parser->getParameters();
     }
 
     /**
