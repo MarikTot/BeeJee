@@ -6,7 +6,7 @@ use App\Exceptions\PreparerException;
 use Exception;
 
 /**
- * Class PrepareData
+ * Class Preparer
  * @package App
  */
 final class Preparer extends Singleton

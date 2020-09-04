@@ -2,6 +2,10 @@
 
 namespace App;
 
+/**
+ * Class Router
+ * @package App
+ */
 final class Router
 {
     /** @var Route[] */

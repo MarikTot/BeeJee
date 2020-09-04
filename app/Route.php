@@ -18,7 +18,7 @@ final class Route
     private string $pattern;
 
     /**
-     * Router constructor.
+     * Route constructor.
      * @param string $method
      * @param string $route
      * @param string $handler
