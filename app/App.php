@@ -42,7 +42,19 @@ final class App extends Singleton
 
             $parameters = $this->router()->parseParameters($route);
 
-            $route->getMiddleware()->run();
+            $middleware = $route->getMiddleware();
+            if (null !== $middleware) {
+                $middleware->run();
+            }
+
+            $validator = $route->getValidator();
+            if (null !== $validator) {
+                $validator->validate($parameters);
+                if (false === $validator->isValid()) {
+                    $validator->fail();
+                }
+                $parameters = $validator->validParameters();
+            }
 
             echo $handler($parameters);
         } catch (Throwable $e) {

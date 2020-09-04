@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Middlewares\Middleware;
+use App\Middlewares\Validator;
 
 /**
  * Class Route
@@ -20,6 +21,7 @@ final class Route
     private string $pattern;
 
     private Middleware $middleware;
+    private Validator $validator;
 
     /**
      * Route constructor.
@@ -69,16 +71,36 @@ final class Route
     }
 
     /**
-     * @return Middleware
+     * @return null|Middleware
      */
-    public function getMiddleware(): Middleware
+    public function getMiddleware(): ?Middleware
     {
         return $this->middleware;
     }
 
-    public function middleware(string $class)
+
+    /**
+     * @return null|Validator
+     */
+    public function getValidator(): ?Validator
+    {
+        return $this->validator;
+    }
+
+    /**
+     * @param string $class
+     */
+    public function middleware(string $class): void
     {
         $this->middleware = new $class();
+    }
+
+    /**
+     * @param string $class
+     */
+    public function validator(string $class): void
+    {
+        $this->validator = new $class();
     }
 
     /**
