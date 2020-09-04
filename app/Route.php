@@ -20,8 +20,8 @@ final class Route
     private string $handler;
     private string $pattern;
 
-    private Middleware $middleware;
-    private Validator $validator;
+    private ?Middleware $middleware = null;
+    private ?Validator $validator = null;
 
     /**
      * Route constructor.
@@ -89,18 +89,22 @@ final class Route
 
     /**
      * @param string $class
+     * @return Route
      */
-    public function middleware(string $class): void
+    public function middleware(string $class): self
     {
         $this->middleware = new $class();
+        return $this;
     }
 
     /**
      * @param string $class
+     * @return Route
      */
-    public function validator(string $class): void
+    public function validator(string $class): self
     {
         $this->validator = new $class();
+        return $this;
     }
 
     /**
