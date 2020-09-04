@@ -88,7 +88,7 @@ final class Router extends Singleton
             return $route;
         }
 
-        // TODO: make route for 404
+        return new Route('/404', 'ErrorController@notFound', Route::METHOD_GET);
     }
 
     /**
