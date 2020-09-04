@@ -2,7 +2,9 @@
 
 use App\DB;
 use App\Exceptions\PreparerException;
+use App\Exceptions\ViewerException;
 use App\Preparer;
+use App\Viewer;
 
 /**
  * @return DB
@@ -29,4 +31,17 @@ function redirect(string $url): void
 {
     header('Location: ' . $url);
     exit;
+}
+
+/**
+ * @param string $template
+ * @param array $objects
+ * @param string $title
+ * @return string
+ * @throws ViewerException
+ */
+function view(string $template, array $objects = [], string $title = ''): string
+{
+    $view = new Viewer($template);
+    return $view->render($objects);
 }

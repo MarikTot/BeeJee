@@ -11,6 +11,7 @@ final class Config extends Singleton
     private const DEFAULT_APP_NAME = 'BeeJee';
     private const DEFAULT_BASE_URL = '\/';
     private const DEFAULT_CONTROLLERS_NAMESPACE = '\\App\\Controllers\\';
+    private const DEFAULT_TEMPLATES_PATH = 'views';
 
     private array $app = [];
     private array $database = [];
@@ -48,5 +49,13 @@ final class Config extends Singleton
     public function getControllersNamespace(): string
     {
         return $this->app['controllers_namespace'] ?? self::DEFAULT_CONTROLLERS_NAMESPACE;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplatePath(): string
+    {
+        return $this->app['templates_path'] ?? self::DEFAULT_TEMPLATES_PATH;
     }
 }
