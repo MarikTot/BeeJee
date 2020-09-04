@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Exceptions\PreparerException;
-use Exception;
 
 /**
  * Class Preparer
@@ -14,7 +13,7 @@ final class Preparer extends Singleton
     /**
      * @param mixed $data
      * @return array|float|int|string
-     * @throws Exception
+     * @throws PreparerException
      */
     public function prepare($data)
     {
