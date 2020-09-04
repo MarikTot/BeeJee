@@ -61,7 +61,7 @@ final class Route
      */
     public function getPattern(): string
     {
-        return $this->pattern;
+        return '/' . $this->pattern . '/';
     }
 
     /**

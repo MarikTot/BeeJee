@@ -14,7 +14,7 @@ final class Router
      */
     public function get(string $route, string $handler)
     {
-        return $this->addRoute(new Route(Route::METHOD_POST, $route, $handler));
+        return $this->addRoute(new Route($route, $handler, Route::METHOD_GET));
     }
 
     /**
@@ -24,7 +24,7 @@ final class Router
      */
     public function post(string $route, string $handler): Route
     {
-        return $this->addRoute(new Route(Route::METHOD_POST, $route, $handler));
+        return $this->addRoute(new Route($route, $handler, Route::METHOD_POST));
     }
 
     /**
@@ -34,13 +34,13 @@ final class Router
      */
     public function any(string $route, string $handler): Route
     {
-        return $this->addRoute(new Route(Route::METHOD_ANY, $route, $handler));
+        return $this->addRoute(new Route($route, $handler, Route::METHOD_ANY));
     }
 
     /**
      * @return string
      */
-    public static function getCurrentPath(): string
+    public static function getCurrentURI(): string
     {
         return $_SERVER['REQUEST_URI'];
     }
@@ -56,7 +56,7 @@ final class Router
     /**
      * @return Route
      */
-    public function findCurrentRoute(): Route
+    public function findRoute(): Route
     {
         foreach ($this->routes as $route) {
             if (false === $this->check($route)) {
@@ -84,7 +84,7 @@ final class Router
      */
     private function checkRoute(Route $route): bool
     {
-        return (bool)preg_match($route->getPattern(), self::getCurrentPath());
+        return (bool)preg_match($route->getPattern(), self::getCurrentURI());
     }
 
     /**
