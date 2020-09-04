@@ -39,11 +39,12 @@ final class Viewer
         extract($objects);
 
         $title = $title !== '' ? $title : Config::getInstance()->getAppName();
+        $template = $this->getFullTemplate($this->template);
 
         if ($this->templateIsExist(self::BASE_TEMPLATE)) {
             require $this->getFullTemplate(self::BASE_TEMPLATE);
         } else {
-            require $this->getFullTemplate($this->template);
+            require $template;
         }
 
         return ob_get_clean();
