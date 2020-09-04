@@ -18,7 +18,7 @@ final class Config extends Singleton
     /**
      * Config constructor.
      */
-    private function __construct()
+    protected function __construct()
     {
         parent::__construct();
 

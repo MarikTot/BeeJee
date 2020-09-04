@@ -8,7 +8,7 @@ namespace App;
  */
 abstract class Singleton
 {
-    private static self $instance;
+    private static array $instances = [];
 
     /**
      * Singleton constructor.
@@ -22,10 +22,11 @@ abstract class Singleton
      */
     public static function getInstance(): self
     {
-        if (false === isset(static::$instance)) {
-            static::$instance = new static();
+        $cls = static::class;
+        if (false === isset(self::$instances[$cls])) {
+            self::$instances[$cls] = new static();
         }
 
-        return static::$instance;
+        return self::$instances[$cls];
     }
 }

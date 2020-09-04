@@ -11,7 +11,7 @@ use App\Exceptions\PreparerException;
 final class Router extends Singleton
 {
     /** @var Route[] */
-    private array $routes;
+    private array $routes = [];
 
     /**
      * @param string $route
