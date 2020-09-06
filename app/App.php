@@ -49,11 +49,11 @@ final class App extends Singleton
 
             $validator = $route->getValidator();
             if (null !== $validator) {
-                $validator->validate($parameters);
+                $parameters = $validator->validate($parameters);
+
                 if (false === $validator->isValid()) {
                     $validator->fail();
                 }
-                $parameters = $validator->validParameters();
             }
 
             echo $handler($parameters);
@@ -78,7 +78,7 @@ final class App extends Singleton
     private function parseHandler(string $handler): array
     {
         list($class, $method) = explode('@', $handler);
-        $class = '\\App\\Controllers\\' . $class;
+        $class = Config::getInstance()->getControllersNamespace() . $class;
 
         return [$class, $method];
     }

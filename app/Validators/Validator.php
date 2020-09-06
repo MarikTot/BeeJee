@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Middlewares;
+namespace App\Validators;
 
 /**
  * Class Validator
- * @package App\Middlewares
+ * @package App\Validators
  */
 abstract class Validator
 {
@@ -36,17 +36,13 @@ abstract class Validator
     }
 
     /**
+     * @param array $parameters
+     * @return array
+     */
+    abstract public function validate(array $parameters): array;
+
+    /**
      * What happens if validation fail
      */
     abstract public function fail();
-
-    /**
-     * @param array $parameters
-     */
-    abstract public function validate(array $parameters);
-
-    /**
-     * @return array
-     */
-    abstract public function validParameters(): array;
 }

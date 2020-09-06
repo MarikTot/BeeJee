@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Middlewares\Middleware;
-use App\Middlewares\Validator;
+use App\Validators\Validator;
 
 /**
  * Class Route
