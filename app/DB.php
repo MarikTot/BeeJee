@@ -18,8 +18,8 @@ final class DB extends Singleton
     private string $db_name = 'mysql';
     private string $charset = 'utf8';
 
-    private string $user;
-    private string $password;
+    private string $user = '';
+    private string $password = '';
 
     private PDO $pdo;
 
@@ -40,12 +40,14 @@ final class DB extends Singleton
         $this->charset = $params['charset'] ?? $this->charset;
 
         if (empty($params['user'])) {
-            throw new DBException('User is empty');
+            throw new DBException('Can\'t connect to database: user is empty');
         }
+        $this->user = $params['user'];
 
         if (empty($params['password'])) {
-            throw new DBException('Password is empty');
+            throw new DBException('Can\'t connect to database: password is empty');
         }
+        $this->password = $params['password'];
 
         $this->pdo = $this->generatePDO();
     }
