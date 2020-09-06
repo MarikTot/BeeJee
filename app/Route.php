@@ -112,7 +112,7 @@ final class Route
      */
     private function generatePattern(): void
     {
-        $pattern = preg_replace('/\{.\+\}/', '.+', $this->getRoute());
+        $pattern = preg_replace('/\{.+\}/', '.+', $this->getRoute());
         $this->pattern = str_replace('/', '\/', $pattern);
         $this->pattern .= '$';
     }
