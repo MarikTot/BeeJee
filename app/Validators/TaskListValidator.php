@@ -26,9 +26,9 @@ final class TaskListValidator extends Validator
     }
 
     /**
-     *
+     * @param array $parameters
      */
-    public function fail()
+    public function fail(array $parameters)
     {
         // Nothing
     }

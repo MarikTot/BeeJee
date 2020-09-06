@@ -39,4 +39,13 @@ final class TaskPageController
             'order' => $order,
         ]);
     }
+
+    /**
+     * @return string
+     * @throws ViewerException
+     */
+    public function create(): string
+    {
+        return view('tasks/create');
+    }
 }

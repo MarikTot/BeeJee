@@ -30,10 +30,15 @@ final class RouteParser
 
     /**
      * @return array
+     * @throws PreparerException
      */
     public function getParameters(): array
     {
-        return $this->parameters;
+        if (Route::METHOD_GET === Router::getCurrentMethod()) {
+            return $this->parameters;
+        }
+
+        return prepare($_POST) + $this->parameters;
     }
 
     /**

@@ -43,6 +43,8 @@ abstract class Validator
 
     /**
      * What happens if validation fail
+     * @param array $parameters
+     * @return  mixed
      */
-    abstract public function fail();
+    abstract public function fail(array $parameters);
 }

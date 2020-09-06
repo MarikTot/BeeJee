@@ -43,4 +43,10 @@
             </table>
         </div>
     </div>
+
+    <div class="row mb-2 mt-2">
+        <div class="col-12 text-right">
+            <a href="/create" class="btn btn-success">Create new task +</a>
+        </div>
+    </div>
 </div>

@@ -52,7 +52,8 @@ final class App extends Singleton
                 $parameters = $validator->validate($parameters);
 
                 if (false === $validator->isValid()) {
-                    $validator->fail();
+                    echo $validator->fail($parameters);
+                    exit;
                 }
             }
 

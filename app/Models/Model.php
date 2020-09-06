@@ -11,6 +11,15 @@ abstract class Model
     protected array $fillable = [];
 
     /**
+     * Model constructor.
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        $this->fill($attributes);
+    }
+
+    /**
      * @param array $attributes
      */
     public function fill(array $attributes): void
