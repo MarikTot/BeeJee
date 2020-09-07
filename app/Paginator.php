@@ -37,7 +37,10 @@ final class Paginator
      */
     public function paginate(): string
     {
-        return view('paginator', ['links' => $this->links]);
+        return view('paginator', [
+            'links' => $this->links,
+            'currentPage' => $this->currentPage,
+        ]);
     }
 
     /**
