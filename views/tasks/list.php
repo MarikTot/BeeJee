@@ -10,12 +10,24 @@
     </div>
 
     <div class="row mb-2 mt-2">
-        <div class="col-6">
+        <div class="col-5">
             Order by:
-            <a href="/<?= $page ?>/id" class="btn btn-info <?= $order === 'id' ? 'disabled' : '' ?>">Default</a>
-            <a href="/<?= $page ?>/user" class="btn btn-info <?= $order === 'user' ? 'disabled' : '' ?>">User</a>
-            <a href="/<?= $page ?>/email" class="btn btn-info <?= $order === 'email' ? 'disabled' : '' ?>">Email</a>
-            <a href="/<?= $page ?>/completed_at" class="btn btn-info <?= $order === 'completed_at' ? 'disabled' : '' ?>">Status</a>
+            <button onclick="go('/<?= $page ?>/id')" class="btn btn-info <?= $order === 'id' ? 'active' : '' ?>">Default</button>
+            <button onclick="go('/<?= $page ?>/user')" class="btn btn-info <?= $order === 'user' ? 'active' : '' ?>">User</button>
+            <button onclick="go('/<?= $page ?>/email')" class="btn btn-info <?= $order === 'email' ? 'active' : '' ?>">Email</button>
+            <button onclick="go('/<?= $page ?>/completed_at')" class="btn btn-info <?= $order === 'completed_at' ? 'active' : '' ?>">Status</button>
+        </div>
+        <div class="col-1">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary <?= isset($orderType) && 'asc' === $orderType ? 'active' : '' ?>">
+                    <input type="radio" name="order" id="asc" autocomplete="off" value="asc" <?= isset($orderType) && 'asc' === $orderType ? 'checked' : '' ?>>
+                    ASC
+                </label>
+                <label class="btn btn-secondary <?= isset($orderType) && 'desc' === $orderType ? 'active' : '' ?>">
+                    <input type="radio" name="order" id="desc" autocomplete="off" value="desc" <?= isset($orderType) && 'desc' === $orderType ? 'checked' : '' ?>>
+                    DESC
+                </label>
+            </div>
         </div>
         <div class="col-6 text-right">
             <?= $paginator->paginate() ?>
@@ -68,3 +80,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function go(link)
+    {
+        let value = document.querySelector('input[name="order"]:checked').value;
+        value = value || 'asc';
+        link += '/' + value;
+        location.href = link;
+    }
+</script>

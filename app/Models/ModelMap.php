@@ -18,22 +18,26 @@ abstract class ModelMap
     private const DEFAULT_LIMIT = 1000;
     private const DEFAULT_ORDER = 'id';
 
+    public const ORDER_TYPE_ASC = 'asc';
+    public const ORDER_TYPE_DESC = 'desc';
+
     /**
      * @param string $orderBy
+     * @param string $orderType
      * @param int $limit
      * @param int $offset
      * @return Model[]
-     * @throws DbException
+     * @throws DBException
      */
-    public function getList(string $orderBy = self::DEFAULT_ORDER, int $limit = self::DEFAULT_LIMIT, int $offset = 0): array
+    public function getList(string $orderBy = self::DEFAULT_ORDER, string $orderType = self::ORDER_TYPE_ASC, int $limit = self::DEFAULT_LIMIT, int $offset = 0): array
     {
         $db = DB::getInstance();
 
-        $sql = 'SELECT * FROM `%s` ORDER BY ? LIMIT %s OFFSET %s';
+        $sql = 'SELECT * FROM `%s` ORDER BY `%s` %s LIMIT %s OFFSET %s';
 
-        $sql = sprintf($sql, static::$table, $limit, $offset);
+        $sql = sprintf($sql, static::$table, $orderBy, $orderType, $limit, $offset);
 
-        $list = $db->query($sql, $orderBy);
+        $list = $db->query($sql);
 
         $objectList = [];
         foreach ($list as $data) {

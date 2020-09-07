@@ -27,17 +27,18 @@ final class TaskService
     /**
      * @param int $page
      * @param string $orderBy
+     * @param string $orderType
      * @param int $limitOnPage
      * @return Task[]
      * @throws DbException
      */
-    public function getListByPage(int $page, string $orderBy, int $limitOnPage): array
+    public function getListByPage(int $page, string $orderBy, string $orderType, int $limitOnPage): array
     {
         $map = new TaskMap();
 
         $offset = ($limitOnPage * $page) - $limitOnPage;
 
-        return $map->getList($orderBy, $limitOnPage, $offset);
+        return $map->getList($orderBy, $orderType, $limitOnPage, $offset);
     }
 
     /**

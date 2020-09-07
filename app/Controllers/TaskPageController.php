@@ -30,14 +30,16 @@ final class TaskPageController
         // validated in validator
         $page = $parameters['page'];
         $order = $parameters['order'];
+        $orderType = $parameters['orderType'];
 
-        $paginator = new Paginator($page, $countPages, '/:page/' . $order);
+        $paginator = new Paginator($page, $countPages, '/:page/' . $order . '/' . $orderType);
 
         return view('tasks/list', [
-            'list' => $taskService->getListByPage($page, $order, self::LIMIT_ON_PAGE),
+            'list' => $taskService->getListByPage($page, $order, $orderType, self::LIMIT_ON_PAGE),
             'paginator' => $paginator,
             'page' => $page,
             'order' => $order,
+            'orderType' => $orderType,
         ]);
     }
 

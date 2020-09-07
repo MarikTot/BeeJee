@@ -21,6 +21,6 @@ $app->router()->post('/create', 'TaskController@create')->validator(TaskCreateVa
 $app->router()->get('/update/{id}', 'TaskPageController@update')->middleware(TaskPageUpdateMiddleware::class);
 $app->router()->post('/update/{id}', 'TaskController@update')->validator(TaskUpdateValidator::class);
 $app->router()->get('/complete/{id}', 'TaskController@complete')->validator(TaskCompleteValidator::class);
-$app->router()->get('/{page}/{order}', 'TaskPageController@list')->validator(TaskListValidator::class);
+$app->router()->get('/{page}/{order}/{orderType}', 'TaskPageController@list')->validator(TaskListValidator::class);
 
 $app->run();
