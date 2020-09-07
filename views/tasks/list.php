@@ -35,7 +35,9 @@
                         <td><?= $item->completed_at ? 'Yes' : 'no' ?></td>
                         <td>
                             <a class="btn btn-info btn-sm" href="/update/<?= $item->id ?>">Update</a>
-                            <a class="btn btn-warning btn-sm text-light" href="/complete/<?= $item->id ?>">Complete</a>
+                            <?php if (null === $item->completed_at): ?>
+                                <a class="btn btn-warning btn-sm text-light" href="/complete/<?= $item->id ?>">Complete</a>
+                            <?php endif;?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
