@@ -29,11 +29,11 @@ abstract class ModelMap
     {
         $db = DB::getInstance();
 
-        $sql = 'SELECT * FROM `%s` ORDER BY `%s` LIMIT %s OFFSET %s';
+        $sql = 'SELECT * FROM `%s` ORDER BY ? LIMIT %s OFFSET %s';
 
-        $sql = sprintf($sql, static::$table, $orderBy, $limit, $offset);
+        $sql = sprintf($sql, static::$table, $limit, $offset);
 
-        $list = $db->query($sql);
+        $list = $db->query($sql, $orderBy);
 
         $objectList = [];
         foreach ($list as $data) {
@@ -52,11 +52,11 @@ abstract class ModelMap
     {
         $db = DB::getInstance();
 
-        $sql = 'SELECT * FROM `%s` WHERE `id` = %s';
+        $sql = 'SELECT * FROM `%s` WHERE `id` = ?';
 
-        $sql = sprintf($sql, static::$table, $id);
+        $sql = sprintf($sql, static::$table);
 
-        $result = $db->query($sql);
+        $result = $db->query($sql, $id);
 
         if ([] === $result) {
             throw new ModelException('Model not found');
@@ -96,23 +96,23 @@ abstract class ModelMap
         $parameters = get_object_vars($model);
 
         // TODO: throw Exception
-        $id = $parameters['id'];
+        $id = (int)$parameters['id'];
 
         $db = DB::getInstance();
 
-        $sql = 'UPDATE `%s` SET %s WHERE `id` = %s';
+        $sql = 'UPDATE `%s` SET %s WHERE `id` = ?';
 
         $set = [];
         foreach ($parameters as $key => $value) {
             if ('id' === $key) {
                 continue;
             }
-            $set[] = sprintf('`%s` = \'%s\'', $key, $value);
+            $set[] = sprintf('`%s` = %s', $key, DB::getInstance()->quoteString($value));
         }
 
-        $sql = sprintf($sql, static::$table, implode(', ', $set), $id);
+        $sql = sprintf($sql, static::$table, implode(', ', $set));
 
-        $db->execute($sql);
+        $db->execute($sql, $id);
 
         return $model;
     }
@@ -183,7 +183,7 @@ abstract class ModelMap
      */
     private function valuesToString(array $values): string
     {
-        $values = array_map(fn($value) => '\'' . $value . '\'', $values);
+        $values = array_map(fn($value) => DB::getInstance()->quoteString($value), $values);
         return implode(', ', $values);
     }
 }

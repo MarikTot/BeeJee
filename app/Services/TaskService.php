@@ -126,9 +126,16 @@ final class TaskService
     public function update(int $id, array $parameters): Task
     {
         $task = $this->getById($id);
+        $originTask = clone($task);
+
         $task->fill($parameters);
 
         $taskMap = new TaskMap();
+
+        // comparing object properties
+        if ($originTask != $task) {
+            $task->setAttribute('updated_at', date('Y-m-d H:i:s'));
+        }
 
         /** @var Task $task */
         $task = $taskMap->update($task);

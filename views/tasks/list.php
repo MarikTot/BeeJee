@@ -32,6 +32,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Text</th>
                     <th scope="col">Completed</th>
+                    <th scope="col"></th>
                     <?php if (isAdmin()): ?>
                         <th scope="col">Actions</th>
                     <?php endif; ?>
@@ -45,6 +46,7 @@
                         <td><?= $item->email ?></td>
                         <td><?= $item->text ?></td>
                         <td><?= $item->completed_at ? 'Yes' : 'no' ?></td>
+                        <td><?= $item->updated_at ? 'Was edited by admin' : '' ?></td>
                         <?php if (isAdmin()): ?>
                             <td>
                                 <a class="btn btn-info btn-sm" href="/update/<?= $item->id ?>">Update</a>

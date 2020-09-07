@@ -8,5 +8,5 @@ namespace App\Models;
  */
 final class Task extends Model
 {
-    protected array $fillable = ['user', 'email', 'text', 'completed_at', ];
+    protected array $fillable = ['user', 'email', 'text', 'updated_at', 'completed_at', ];
 }

@@ -94,6 +94,16 @@ final class DB extends Singleton
     }
 
     /**
+     * @param string $parameter
+     * @return string
+     */
+    public function quoteString(string $parameter): string
+    {
+        // TODO: common method for all
+        return $this->pdo->quote($parameter, PDO::PARAM_STR);
+    }
+
+    /**
      * @return PDO
      */
     private function generatePDO(): PDO
