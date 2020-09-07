@@ -37,6 +37,8 @@ final class App extends Singleton
     public function run(): void
     {
         try {
+            session_start();
+
             $route = $this->router()->findRoute();
             $handler = $this->handler($route->getHandler());
 
