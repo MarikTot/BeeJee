@@ -40,13 +40,13 @@
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
+                    <th width="100" scope="col">Name</th>
+                    <th width="150" scope="col">Email</th>
                     <th scope="col">Text</th>
-                    <th scope="col">Completed</th>
+                    <th width="100" scope="col">Completed</th>
                     <th scope="col"></th>
                     <?php if (isAdmin()): ?>
-                        <th scope="col">Actions</th>
+                        <th width="180" scope="col">Actions</th>
                     <?php endif; ?>
                 </tr>
                 </thead>
