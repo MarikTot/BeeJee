@@ -12,24 +12,26 @@
     <div class="row mb-2 mt-2">
         <div class="col-5">
             Order by:
-            <button onclick="go('/<?= $page ?>/id')" class="btn btn-info <?= $order === 'id' ? 'active' : '' ?>">Default</button>
-            <button onclick="go('/<?= $page ?>/user')" class="btn btn-info <?= $order === 'user' ? 'active' : '' ?>">User</button>
-            <button onclick="go('/<?= $page ?>/email')" class="btn btn-info <?= $order === 'email' ? 'active' : '' ?>">Email</button>
-            <button onclick="go('/<?= $page ?>/completed_at')" class="btn btn-info <?= $order === 'completed_at' ? 'active' : '' ?>">Status</button>
+            <a href="/<?= $page ?? 1 ?>/id/<?= $orderType ?? 'asc' ?>" class="btn btn-info <?= $order === 'id' ? 'active' : '' ?>">Default</a>
+            <a href="/<?= $page ?? 1 ?>/user/<?= $orderType ?? 'asc' ?>" class="btn btn-info <?= $order === 'user' ? 'active' : '' ?>">User</a>
+            <a href="/<?= $page ?? 1 ?>/email/<?= $orderType ?? 'asc' ?>" class="btn btn-info <?= $order === 'email' ? 'active' : '' ?>">Email</a>
+            <a href="/<?= $page ?? 1 ?>/completed_at/<?= $orderType ?? 'asc' ?>" class="btn btn-info <?= $order === 'completed_at' ? 'active' : '' ?>">Status</a>
         </div>
-        <div class="col-1">
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary <?= isset($orderType) && 'asc' === $orderType ? 'active' : '' ?>">
-                    <input type="radio" name="order" id="asc" autocomplete="off" value="asc" <?= isset($orderType) && 'asc' === $orderType ? 'checked' : '' ?>>
-                    ASC
-                </label>
-                <label class="btn btn-secondary <?= isset($orderType) && 'desc' === $orderType ? 'active' : '' ?>">
-                    <input type="radio" name="order" id="desc" autocomplete="off" value="desc" <?= isset($orderType) && 'desc' === $orderType ? 'checked' : '' ?>>
-                    DESC
-                </label>
-            </div>
+        <div class="col-2">
+            <a
+                    href="/<?= $page ?? 1 ?>/<?= $order ?? 'id' ?>/asc"
+                    class="btn btn-secondary <?= $orderType === 'asc' ? 'active' : '' ?>"
+            >
+                ASC
+            </a>
+            <a
+                    href="/<?= $page ?? 1 ?>/<?= $order ?? 'id' ?>/desc"
+                    class="btn btn-secondary <?= $orderType === 'desc' ? 'active' : '' ?>"
+            >
+                DESC
+            </a>
         </div>
-        <div class="col-6 text-right">
+        <div class="col-5 text-right">
             <?= $paginator->paginate() ?>
         </div>
     </div>
@@ -39,10 +41,10 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">id</th>
-                    <th width="100" scope="col">Name</th>
-                    <th width="150" scope="col">Email</th>
-                    <th scope="col">Text</th>
+                    <th width="30" scope="col">id</th>
+                    <th width="200" scope="col">Name</th>
+                    <th width="200" scope="col">Email</th>
+                    <th width="200" scope="col">Text</th>
                     <th width="100" scope="col">Completed</th>
                     <th scope="col"></th>
                     <?php if (isAdmin()): ?>
