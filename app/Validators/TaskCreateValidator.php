@@ -49,7 +49,7 @@ final class TaskCreateValidator extends Validator
      */
     private function validateUser(string $user): void
     {
-        if (strlen($user) < 3) {
+        if (strlen($user) <= 3) {
             $this->addError('user', 'User must be longer than 3 characters');
         }
     }

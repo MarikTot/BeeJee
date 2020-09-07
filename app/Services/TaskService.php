@@ -86,8 +86,7 @@ final class TaskService
     /**
      * @param array $parameters
      * @return Task
-     * @throws DbException
-     * @throws ModelException
+     * @throws DbException|ModelException
      */
     public function create(array $parameters): Task
     {
@@ -104,8 +103,7 @@ final class TaskService
     /**
      * @param int $id
      * @return Task
-     * @throws DbException
-     * @throws ModelException
+     * @throws DbException|ModelException
      */
     public function complete(int $id): Task
     {
@@ -121,15 +119,14 @@ final class TaskService
 
     /**
      * @param int $id
-     * @param string $text
+     * @param array $parameters
      * @return Task
-     * @throws DbException
-     * @throws ModelException
+     * @throws DbException|ModelException
      */
-    public function updateText(int $id, string $text): Task
+    public function update(int $id, array $parameters): Task
     {
         $task = $this->getById($id);
-        $task->setAttribute('text', $text);
+        $task->fill($parameters);
 
         $taskMap = new TaskMap();
 

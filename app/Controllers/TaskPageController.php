@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Exceptions\DbException;
+use App\Exceptions\ModelException;
 use App\Exceptions\ViewerException;
 use App\Paginator;
 use App\Services\TaskService;
@@ -47,5 +48,23 @@ final class TaskPageController
     public function create(): string
     {
         return view('tasks/create');
+    }
+
+    /**
+     * @param array $parameters
+     * @return string
+     * @throws DbException
+     * @throws ViewerException|ModelException
+     */
+    public function update(array $parameters): string
+    {
+        $taskService = new TaskService();
+
+        // validated in validator
+        $task = $taskService->getById($parameters['id']);
+
+        return view('tasks/update', [
+            'task' => get_object_vars($task),
+        ]);
     }
 }

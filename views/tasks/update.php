@@ -1,16 +1,17 @@
 <div class="container">
     <div class="row mb-2 mt-2">
         <div class="col-12">
-            <form action="/create" method="post">
+            <form action="/update/<?= $task['id'] ?? '' ?>" method="post">
                 <div class="form-group">
                     <label for="user">User</label>
                     <input
                         id="user"
                         name="user"
                         type="text"
-                        class="form-control <?= isset($errors['user']) ? 'is-invalid' : '' ?>"
+                        class="form-control <?= isset($errors['email']) ? 'is-invalid' : '' ?>"
                         placeholder="Mark"
                         value="<?= $task['user'] ?? '' ?>"
+                        disabled
                     />
                     <div class="invalid-feedback">
                         <?= $errors['user'] ?? '' ?>
@@ -25,6 +26,7 @@
                         class="form-control <?= isset($errors['email']) ? 'is-invalid' : '' ?>"
                         placeholder="mark@gmail.com"
                         value="<?= $task['email'] ?? '' ?>"
+                        disabled
                     />
                     <div class="invalid-feedback">
                         <?= $errors['email'] ?? '' ?>
@@ -42,7 +44,7 @@
                         <a href="/" class="btn btn-secondary">Back to list</a>
                     </div>
                     <div class="col-6 text-right">
-                        <button type="submit" class="btn btn-success mb-2">Create +</button>
+                        <button type="submit" class="btn btn-info mb-2">Save</button>
                     </div>
                 </div>
             </form>

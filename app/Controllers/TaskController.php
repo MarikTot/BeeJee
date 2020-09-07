@@ -24,4 +24,16 @@ class TaskController
 
         redirect('/');
     }
+    /**
+     * @param array $parameters
+     * @throws DbException
+     * @throws ModelException
+     */
+    public function update(array $parameters): void
+    {
+        $taskService = new TaskService();
+        $taskService->update($parameters['id'], $parameters);
+
+        redirect('/');
+    }
 }

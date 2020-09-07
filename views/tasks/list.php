@@ -34,8 +34,8 @@
                         <td><?= $item->text ?></td>
                         <td><?= $item->completed_at ? 'Yes' : 'no' ?></td>
                         <td>
-                            <a class="btn btn-info btn-sm" href="/edit/<?= $item->id ?>">Редактировать</a>
-                            <a class="btn btn-warning btn-sm text-light" href="/complete/<?= $item->id ?>">Выполнить</a>
+                            <a class="btn btn-info btn-sm" href="/update/<?= $item->id ?>">Update</a>
+                            <a class="btn btn-warning btn-sm text-light" href="/complete/<?= $item->id ?>">Complete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

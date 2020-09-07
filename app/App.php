@@ -44,17 +44,17 @@ final class App extends Singleton
 
             $middleware = $route->getMiddleware();
             if (null !== $middleware) {
-                $middleware->run();
+                $middleware->run($parameters);
             }
 
             $validator = $route->getValidator();
             if (null !== $validator) {
-                $parameters = $validator->validate($parameters);
-
+                $validatedParameters = $validator->validate($parameters);
                 if (false === $validator->isValid()) {
                     echo $validator->fail($parameters);
                     exit;
                 }
+                $parameters = $validatedParameters;
             }
 
             echo $handler($parameters);

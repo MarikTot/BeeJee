@@ -9,7 +9,7 @@ namespace App\Middlewares;
 abstract class Middleware
 {
     /**
-     *
+     * @param array $parameters
      */
-    abstract public function run();
+    abstract public function run(array $parameters);
 }
