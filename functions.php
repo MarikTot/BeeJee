@@ -1,5 +1,6 @@
 <?php
 
+use App\AuthAdmin;
 use App\DB;
 use App\Exceptions\PreparerException;
 use App\Exceptions\ViewerException;
@@ -44,4 +45,12 @@ function view(string $template, array $objects = [], string $title = ''): string
 {
     $view = new Viewer($template);
     return $view->render($objects);
+}
+
+/**
+ * @return bool
+ */
+function isAdmin(): bool
+{
+    return AuthAdmin::getInstance()->isAdmin();
 }

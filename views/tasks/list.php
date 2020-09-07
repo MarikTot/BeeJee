@@ -1,4 +1,14 @@
 <div class="container">
+    <div class="row mb-5 mt-2">
+        <div class="col-12 text-right">
+            <?php if (isAdmin()): ?>
+                <a href="/logout" class="btn btn-info">Logout</a>
+            <?php else: ?>
+                <a href="/login" class="btn btn-info">Login</a>
+            <?php endif; ?>
+        </div>
+    </div>
+
     <div class="row mb-2 mt-2">
         <div class="col-6">
             Order by:
@@ -22,7 +32,9 @@
                     <th scope="col">Email</th>
                     <th scope="col">Text</th>
                     <th scope="col">Completed</th>
-                    <th scope="col">Actions</th>
+                    <?php if (isAdmin()): ?>
+                        <th scope="col">Actions</th>
+                    <?php endif; ?>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,12 +45,14 @@
                         <td><?= $item->email ?></td>
                         <td><?= $item->text ?></td>
                         <td><?= $item->completed_at ? 'Yes' : 'no' ?></td>
-                        <td>
-                            <a class="btn btn-info btn-sm" href="/update/<?= $item->id ?>">Update</a>
-                            <?php if (null === $item->completed_at): ?>
-                                <a class="btn btn-warning btn-sm text-light" href="/complete/<?= $item->id ?>">Complete</a>
-                            <?php endif;?>
-                        </td>
+                        <?php if (isAdmin()): ?>
+                            <td>
+                                <a class="btn btn-info btn-sm" href="/update/<?= $item->id ?>">Update</a>
+                                <?php if (null === $item->completed_at): ?>
+                                    <a class="btn btn-warning btn-sm text-light" href="/complete/<?= $item->id ?>">Complete</a>
+                                <?php endif;?>
+                            </td>
+                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
