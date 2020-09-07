@@ -49,8 +49,8 @@ final class TaskCreateValidator extends Validator
      */
     private function validateUser(string $user): void
     {
-        if (strlen($user) <= 3) {
-            $this->addError('user', 'User must be longer than 3 characters');
+        if (empty($user)) {
+            $this->addError('user', 'User is empty');
         }
     }
 
@@ -59,6 +59,11 @@ final class TaskCreateValidator extends Validator
      */
     protected function validateEmail(string $email): void
     {
+        if (empty($email)) {
+            $this->addError('email', 'Email is empty');
+            return;
+        }
+
         $email = filter_var($email, FILTER_VALIDATE_EMAIL);
 
         if (false === $email) {
