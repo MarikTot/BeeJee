@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Exceptions\DbException;
 use App\Exceptions\ModelException;
+use App\PageNotifier;
 use App\Services\TaskService;
 
 /**
@@ -22,6 +23,8 @@ class TaskController
         $taskService = new TaskService();
         $taskService->create($parameters);
 
+        PageNotifier::getInstance()->addSuccess('Task was created');
+
         redirect('/');
     }
 
@@ -34,6 +37,8 @@ class TaskController
     {
         $taskService = new TaskService();
         $taskService->update($parameters['id'], $parameters);
+
+        PageNotifier::getInstance()->addSuccess('Task was updated');
 
         redirect('/');
     }
@@ -48,6 +53,8 @@ class TaskController
         $taskService = new TaskService();
 
         $taskService->complete((int)$parameters['id']);
+
+        PageNotifier::getInstance()->addSuccess('Task was completed');
 
         redirect('/');
     }
