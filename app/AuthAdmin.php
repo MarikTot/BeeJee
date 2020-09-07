@@ -20,9 +20,19 @@ final class AuthAdmin extends Singleton
      */
     public function login(string $login, string $password): void
     {
-        if (self::ADMIN_LOGIN === $login && $this->checkPassword($password)) {
+        if ($this->check($login, $password)) {
             $this->setAdminCookie();
         }
+    }
+
+    /**
+     * @param string $login
+     * @param string $password
+     * @return bool
+     */
+    public function check(string $login, string $password): bool
+    {
+        return self::ADMIN_LOGIN === $login && $this->checkPassword($password);
     }
 
     /**
@@ -30,7 +40,7 @@ final class AuthAdmin extends Singleton
      */
     public function logout(): void
     {
-        setcookie(self::IS_ADMIN_COOKIE_NAME, 0, time() - 3600, Config::getInstance()->getBaseUrl() . '/');
+        setcookie(self::IS_ADMIN_COOKIE_NAME, 0, time() - 3600, Config::getInstance()->getBaseUrl());
     }
 
     /**
@@ -64,6 +74,6 @@ final class AuthAdmin extends Singleton
      */
     private function setAdminCookie(): void
     {
-        setcookie(self::IS_ADMIN_COOKIE_NAME, 1, time() + self::ONE_DAY_SEC, Config::getInstance()->getBaseUrl() . '/');
+        setcookie(self::IS_ADMIN_COOKIE_NAME, 1, time() + self::ONE_DAY_SEC, Config::getInstance()->getBaseUrl());
     }
 }

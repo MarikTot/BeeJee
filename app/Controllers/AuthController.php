@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\AuthAdmin;
+use App\PageNotifier;
 
 /**
  * Class AuthController
@@ -16,6 +17,7 @@ class AuthController
     public function login(array $parameters): void
     {
         AuthAdmin::getInstance()->login($parameters['login'], $parameters['password']);
+        PageNotifier::getInstance()->addSuccess('Login success');
 
         redirect('/');
     }

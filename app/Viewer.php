@@ -11,6 +11,7 @@ use App\Exceptions\ViewerException;
 final class Viewer
 {
     private const BASE_TEMPLATE = 'index';
+    private const PAGINATOR_TEMPLATE = 'paginator';
 
     private string $template;
 
@@ -41,7 +42,7 @@ final class Viewer
         $title = $title !== '' ? $title : Config::getInstance()->getAppName();
         $template = $this->getFullTemplate($this->template);
 
-        if ($this->templateIsExist(self::BASE_TEMPLATE)) {
+        if ($this->templateIsExist(self::BASE_TEMPLATE) && self::PAGINATOR_TEMPLATE !== $this->template) {
             require $this->getFullTemplate(self::BASE_TEMPLATE);
         } else {
             require $template;

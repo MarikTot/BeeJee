@@ -4,6 +4,7 @@ use App\AuthAdmin;
 use App\DB;
 use App\Exceptions\PreparerException;
 use App\Exceptions\ViewerException;
+use App\PageNotifier;
 use App\Preparer;
 use App\Viewer;
 
@@ -53,4 +54,20 @@ function view(string $template, array $objects = [], string $title = ''): string
 function isAdmin(): bool
 {
     return AuthAdmin::getInstance()->isAdmin();
+}
+
+/**
+ * @return string
+ */
+function getSuccessNotice(): string
+{
+    return PageNotifier::getInstance()->getSuccess();
+}
+
+/**
+ * @return string
+ */
+function getErrorNotice(): string
+{
+    return PageNotifier::getInstance()->getError();
 }
